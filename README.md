@@ -10,3 +10,5 @@ This value is then normalized using a logistic function.
 Usernames from the list of initial mentions are then analyzed using the same approach.
 
 The 200 most recent tweets from each account are used for user mention counts.
+
+* Must include consumer key, consumer secret,access token, and access token secret from an active twitter developer account
