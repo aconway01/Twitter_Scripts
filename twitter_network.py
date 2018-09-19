@@ -1,6 +1,7 @@
 import tweepy
 import pandas as pd
 from datetime import datetime, date, time, timedelta
+import math
 
 from tweepy import Cursor
 from collections import Counter
@@ -16,6 +17,9 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token,access_token_secret)
 
 api = tweepy.API(auth)
+
+def logistic(x):
+    return 100*round((1/(1+math.e**(-1*(x)))),4)
 
 def parse(username):
     item = api.get_user(username)
@@ -75,16 +79,19 @@ if __name__=="__main__":
     mentions = []
     mentions.append(rootMentions)
     beta_mentions = []
-    root_beta_mentions = [[mentions[0][i][0],mentions[0][i][1]*betas[0]] for i in range(len(mentions[0]))]
+    root_beta_mentions = [[mentions[0][i][0],logistic(mentions[0][i][1]*betas[0])] for i in range(len(mentions[0]))]
     beta_mentions.append(root_beta_mentions)
 
     for user in rootMentions:
-        name,beta,mention = parse(user[0])
-        names.append(name)
-        betas.append(beta)
-        mentions.append(mention)
-        beta_mention = [[mention[i][0],mention[i][1]*beta] for i in range(len(mention))]
-        beta_mentions.append(beta_mention)
+        try:
+            name,beta,mention = parse(user[0])
+            names.append(name)
+            betas.append(beta)
+            mentions.append(mention)
+            beta_mention = [[mention[i][0],logistic(mention[i][1]*beta)] for i in range(len(mention))]
+            beta_mentions.append(beta_mention)
+        except:
+            print("Err: User profile private")
 
     for i in range(len(names)):
         print(names[i])
