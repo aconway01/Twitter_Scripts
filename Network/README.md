@@ -11,4 +11,4 @@ Usernames from the list of initial mentions are then analyzed using the same app
 
 The 200 most recent tweets from each account are used for user mention counts.
 
-NOTE: Must include consumer key, consumer secret,access token, and access token secret from an active twitter developer account
+NOTE: Must include consumer key, consumer secret, access token, and access token secret from an active twitter developer account
