@@ -1,4 +1,4 @@
-# user_search
+# user_sentiment
 Python script for sentiment analysis of user tweets in the last 30 days given a user account handle.
 
 usage: twitter_network.py [-h] username
